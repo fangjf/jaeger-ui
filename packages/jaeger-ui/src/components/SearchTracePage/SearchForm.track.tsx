@@ -27,6 +27,7 @@ export const FORM_CATEGORY_BASE = 'jaeger/ux/search/form';
 export const CATEGORY_OPERATION = `${FORM_CATEGORY_BASE}/operation`;
 export const CATEGORY_LOOKBACK = `${FORM_CATEGORY_BASE}/lookback`;
 export const CATEGORY_TAGS = `${FORM_CATEGORY_BASE}/tags`;
+export const CATEGORY_FULL_TEXT = `${FORM_CATEGORY_BASE}/full_text`;
 export const CATEGORY_MIN_DURATION = `${FORM_CATEGORY_BASE}/min_duration`;
 export const CATEGORY_MAX_DURATION = `${FORM_CATEGORY_BASE}/max_duration`;
 export const CATEGORY_LIMIT = `${FORM_CATEGORY_BASE}/limit`;
@@ -35,6 +36,7 @@ export function trackFormInput(
   resultsLimit: number,
   operation: string,
   tags: any,
+  fullText: string,
   minDuration: number,
   maxDuration: number,
   lookback: string
@@ -44,6 +46,7 @@ export function trackFormInput(
   trackEvent(CATEGORY_MAX_DURATION, maxDuration ? ACTION_SET : ACTION_CLEAR);
   trackEvent(CATEGORY_MIN_DURATION, minDuration ? ACTION_SET : ACTION_CLEAR);
   trackEvent(CATEGORY_TAGS, tags ? ACTION_SET : ACTION_CLEAR);
+  trackEvent(CATEGORY_FULL_TEXT, fullText ? ACTION_SET : ACTION_CLEAR);
   trackEvent(CATEGORY_LOOKBACK, lookback);
 }
 

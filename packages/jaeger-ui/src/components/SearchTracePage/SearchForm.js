@@ -214,6 +214,7 @@ export function submitForm(fields, searchTraces) {
     endDateTime,
     operation,
     tags,
+    fullText,
     minDuration,
     maxDuration,
     lookback,
@@ -238,7 +239,7 @@ export function submitForm(fields, searchTraces) {
     end = times.end;
   }
 
-  trackFormInput(resultsLimit, operation, tags, minDuration, maxDuration, lookback);
+  trackFormInput(resultsLimit, operation, tags, fullText, minDuration, maxDuration, lookback);
 
   searchTraces({
     service,
@@ -248,6 +249,7 @@ export function submitForm(fields, searchTraces) {
     start,
     end,
     tags: convTagsLogfmt(tags) || undefined,
+    fullText: fullText || null,
     minDuration: minDuration || null,
     maxDuration: maxDuration || null,
   });
@@ -346,6 +348,14 @@ export class SearchFormImpl extends React.PureComponent {
             name="tags"
             component={AdaptedInput}
             placeholder="http.status_code=200 error=true"
+            props={{ disabled }}
+          />
+        </FormItem>
+
+        <FormItem label="Full Text">
+          <Field
+            name="fullText"
+            component={AdaptedInput}
             props={{ disabled }}
           />
         </FormItem>
@@ -496,6 +506,7 @@ export function mapStateToProps(state) {
     operation,
     tag: tagParams,
     tags: logfmtTags,
+    fullText,
     maxDuration,
     minDuration,
     lookback,
@@ -594,6 +605,7 @@ export function mapStateToProps(state) {
       endDateTime: queryEndDateTime || currentTime,
       operation: operation || lastSearchOperation || DEFAULT_OPERATION,
       tags,
+      fullText: fullText || null,
       minDuration: minDuration || null,
       maxDuration: maxDuration || null,
       traceIDs: traceIDs || null,
