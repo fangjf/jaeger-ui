@@ -41,17 +41,19 @@ export default class DAG extends React.Component {
     const nodes = [];
     const edges = [];
     serviceCalls.forEach(d => {
-      if (!nodeMap[d.parent]) {
+      if (d.parent && !nodeMap[d.parent]) {
         nodes.push({ data: { id: d.parent } });
         nodeMap[d.parent] = true;
       }
-      if (!nodeMap[d.child]) {
+      if (d.child && !nodeMap[d.child]) {
         nodes.push({ data: { id: d.child } });
         nodeMap[d.child] = true;
       }
-      edges.push({
-        data: { source: d.parent, target: d.child, label: `${d.callCount}` },
-      });
+      if (d.parent && d.child) {
+        edges.push({
+          data: { source: d.parent, target: d.child, label: `${d.callCount}` },
+        });
+      }
     });
     cytoscape({
       container: document.getElementById('cy'),

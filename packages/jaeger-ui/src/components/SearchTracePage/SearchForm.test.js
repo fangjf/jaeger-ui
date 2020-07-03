@@ -55,6 +55,7 @@ function makeDateParams(dateOffset = 0) {
 const DATE_FORMAT = 'YYYY-MM-DD';
 const TIME_FORMAT = 'HH:mm';
 const defaultProps = {
+  handleSubmit: () => {},
   dataCenters: ['dc1'],
   searchMaxLookback: {
     label: '2 Days',
@@ -476,6 +477,7 @@ describe('mapStateToProps()', () => {
         minDuration: null,
         operation: 'Driver::findNearest',
         service: 'driver',
+        fullText: "text",
       };
       params = {
         ...common,
@@ -527,6 +529,7 @@ describe('mapStateToProps()', () => {
       lookback: '1h',
       operation: 'all',
       tags: undefined,
+      fullText: null,
       minDuration: null,
       maxDuration: null,
       traceIDs: null,
